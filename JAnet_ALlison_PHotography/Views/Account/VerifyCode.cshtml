@@ -1,0 +1,40 @@
+﻿@model JAnet_ALlison_PHotography.Models.VerifyCodeViewModel
+@{
+    ViewBag.Title = "Verify";
+}
+
+<h2>@ViewBag.Title.</h2>
+<main role="main">
+    <section class="jumbotron col-md-10 col-sm-12 mx-auto py-3">
+        <div class="container">
+            <h1 class="jumbotron-heading text-center display-1">About</h1>
+            @using (Html.BeginForm("VerifyCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "col-md-8 col-xs-12 mx-auto", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("provider", @Model.Provider)
+                @Html.Hidden("rememberMe", @Model.RememberMe)
+                <h4>Enter verification code</h4>
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="">
+                    @Html.LabelFor(m => m.Code, new { @class = "col-form-label" })
+                    <div class="">
+                        @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="">
+                    <div class="">
+                        <div class="">
+                            @Html.CheckBoxFor(m => m.RememberBrowser, new { @class = "form-control" })
+                            @Html.LabelFor(m => m.RememberBrowser, new { @class = "col-form-label" })
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary m-2 col-md-3 col-sm-12" value="Submit" />
+            }
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
+            </div>
+    </section>
+</main>

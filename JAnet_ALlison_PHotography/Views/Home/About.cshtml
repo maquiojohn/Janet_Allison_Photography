@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+@section cssBooking {
+    @Styles.Render("~/Content/BookingCSS.css")
+}
+<main role="main">
+    <section class="jumbotron col-md-10 col-sm-12 mx-auto py-3">
+        <div class="container">
+            <h1 class="jumbotron-heading text-center display-1">About</h1>
+            <div class="row">
+                <div id="carouselExampleCaptions" class="carousel slide col-lg-6 col-sm-12 centerHeight" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="~/Pics/tucker.jpg" alt="Sample Photo" class="img-fluid" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/Pics/6F0A3531a.jpg" alt="Sample Photo" class="img-fluid" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/Pics/6F0A3252edit.JPG" alt="Sample Photo" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+                <p class="lead col-lg-6 col-sm-12">
+                    My interests in photography began 40 years ago in high school when I joined an after-school program. Mr. Richards was an amazing and patient teacher.  In his spare time, took a bunch of young students and turned them into amateur photographers, I was one of them.<br /><br />
+                    Back then photography wasn’t what it is today.  I learned on a 35mm Nikon camera and many times it was hit and miss, more misses than hits I might add but through rolls and rolls of black and white film I overcame the unfocused, overexposed, crooked images.<br /><br />
+                    After 5 years of learning the ins and outs of handling a camera, working as an editor for the yearbook, and developing and printing my images I came out of it with the highest award offered in my school.  An accomplishment of hard work and dedication in a field of study that I continue to this day.<br /><br />
+                    As photographers we make people smile for the camera, ‘say cheese, let’s see those teeth, keep your eyes open’ and the list goes on, but the true smiles are those the client gives years down the road when they look at their pictures and remember the past.<br /><br />
+                    That is my goal, to offer pictures that will bring cherished memories forever.
+                </p>
+            </div>
+            <br>
+            <div class="text-center">
+                @Html.ActionLink("Book With Us Today", "Create", "Booking", null, new { @class = "btn btn-primary m-2 col-md-3 col-sm-12" })
+                @Html.ActionLink("Browse Our Store", "Index", "StoreDetail", null, new { @class = "btn btn-primary m-2 col-md-3 col-sm-12" })
+            </div>
+        </div>
+    </section>
+
+    <div class="text-center">
+        <h1>Our Employees</h1>
+    </div>
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Employee" alt="Janet Allison [100%x225]" style="height: 225px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22311%22%20height%3D%22225%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20ContactBox%3D%220%200%20311%20225%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16758498651%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16758498651%22%3E%3Crect%20width%3D%22311%22%20height%3D%22225%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22101.578125%22%20y%3D%22119.7%22%3EJanetAllison%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                        <div class="card-body">
+                            <p class="card-text"><b>Janet Allison</b><br />Janet Allison is the founder of this company and has been taking pictures ever since she was a child.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="text-center">
+                                    @Html.ActionLink("Contact", "Contact", "Home", new { @class = "btn btn-sm btn-outline-secondary" })
+                                </div>
+                                <small class="text-muted">Founder</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>

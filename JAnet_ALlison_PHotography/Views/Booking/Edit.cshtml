@@ -1,0 +1,79 @@
+﻿@model JAnet_ALlison_PHotography.Models.Booking
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-1">@ViewBag.Title</h1><br>
+        @using (Html.BeginForm(new { @class = "col-md-8 col-xs-12 mx-auto", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="">
+                <h4>Booking</h4>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.booking_Id)
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="">
+                    @Html.LabelFor(model => model.employee_Id, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="">
+                        @Html.DropDownListFor(m => m.employee_Id, new SelectList(ViewBag.Employee, "Value", "Text"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.employee_Id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="">
+                    @Html.LabelFor(model => model.dateTime, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.dateTime, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.dateTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="">
+                    @Html.LabelFor(model => model.PhotoType, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="">
+                        @Html.DropDownListFor(m => m.PhotoType, new SelectList(ViewBag.photoType, "Value", "Text"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PhotoType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="">
+                    @Html.LabelFor(model => model.PhotoDetail, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.PhotoDetail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PhotoDetail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="">
+                    @Html.LabelFor(model => model.NumPeople, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.NumPeople, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NumPeople, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Medium, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="col-md-10">
+                        @Html.RadioButtonFor(model => model.Medium, "Digital", new { Checked = "checked" })@("Digital")<br />
+                        @Html.RadioButtonFor(model => model.Medium, "Printed")@("Printed")
+                        @Html.ValidationMessageFor(model => model.Medium, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="text-center">
+                        <input type="submit" value="Save Changes" class="btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12" /><br />
+
+                    </div>
+                </div>
+                @Html.ActionLink("Back to List", "Index", "BookingDetail")
+            </div>
+        }
+    </div>
+</section>

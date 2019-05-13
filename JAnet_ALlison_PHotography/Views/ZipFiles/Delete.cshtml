@@ -1,0 +1,61 @@
+﻿@model JAnet_ALlison_PHotography.Models.ZipFile
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto" style="padding: 0!important;">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-1">@ViewBag.Title</h1><br>
+        <h3 class="text-center lead">Are you sure you want to delete this?</h3>
+        <div>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Customer_Id)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @ViewBag.Name
+                    @*Html.DisplayFor(model => model.Customer_Id)*@
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.UploadDate)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.UploadDate)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.DateTaken)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.DateTaken)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color text-center">
+                    <input type="submit" value="Delete" class="btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12" style="margin: 0!important;" /><br /><br />
+
+                </div>
+            }
+            @Html.ActionLink("Back to List", "Index", "CustomerZipFile")<br /><br />
+        </div>
+    </div>
+</section>

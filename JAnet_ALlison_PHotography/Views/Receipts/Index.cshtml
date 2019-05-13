@@ -1,0 +1,156 @@
+﻿@model IEnumerable<JAnet_ALlison_PHotography.Models.Receipt>
+
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Receipt Page";
+}
+
+<section class="jumbotron col-lg-8 col-md-11 col-xs-12 py-3 mx-auto" style="padding: 0!important;">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-1">@ViewBag.Title</h1><br>
+        @if (User.IsInRole("Admin"))
+        {
+            var temp = ViewBag.Receipts.Count;
+            if (temp != 0)
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstName):
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LastName):
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Address):
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PhoneNumber):
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email):
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Receipt_Date)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Address)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @String.Format("{0:MMM/dd/yy}", item.Receipt_Date)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Details", "Details", new { id = item.Receipt_Id })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center">No Items Purchased</div>
+            }
+        }
+        else
+        {
+            var temp = ViewBag.ReceiptList.Count;
+            if (temp != 0)
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FirstName):
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LastName):
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Address):
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PhoneNumber):
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email):
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Receipt_Date):
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                if (item.Email.Equals(User.Identity.GetUserName()))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FirstName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LastName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Address)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            @String.Format("{0:MMM/dd/yy}", item.Receipt_Date)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Details", "Details", new { id = item.Receipt_Id })
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center p-4">No items purchased, @Html.ActionLink("visit our store", "Index", "StoreDetail") to see what's available.</div>
+            }
+        }
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="p-2 text-center">
+                @Html.ActionLink("Summary Report", "SummaryReport", "Receipts", null, new { @class = "btn btn-primary m-2 col-xl-3 col-md-12 col-sm-12", @style = "margin-left: 0!important;" })<br />
+                @Html.ActionLink("Exception Report", "ExceptionReport", "Receipts", null, new { @class = "btn btn-primary m-2 col-xl-3 col-md-12 col-sm-12", @style = "margin-left: 0!important;" })<br />
+                @Html.ActionLink("Detail Report", "DetailedRerport", "Receipts", null, new { @class = "btn btn-primary m-2 col-xl-3 col-md-12 col-sm-12", @style = "margin-left: 0!important;" })
+            </div>
+        }
+    </div>
+</section>

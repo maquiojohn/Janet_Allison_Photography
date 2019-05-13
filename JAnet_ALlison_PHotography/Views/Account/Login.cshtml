@@ -1,0 +1,50 @@
+﻿@using JAnet_ALlison_PHotography.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center">Log In to Janet Allison Photography</h1><br>
+        <p class="lead text-center">Where we offer pictures that will bring cherished memories forever.</p><br>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "col-md-8 col-xs-12 mx-auto", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <hr /><br />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div>
+                @Html.LabelFor(m => m.Email, new { @class = "col-form-label" })
+                <div>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })<br />
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(m => m.Password, new { @class = "col-form-label" })
+                <div>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })<br />
+                </div>
+            </div>
+            <div>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)<br /><br />
+            </div>
+            <div class="text-center">
+                <input type="submit" value="Log in" class="btn btn-primary" /><br /><br />
+
+                <p>
+                    @Html.ActionLink("Don't have an account? Register here!", "Register")
+                </p>
+                <p>
+                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                </p>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,76 @@
+﻿
+@model IEnumerable<JAnet_ALlison_PHotography.ViewModel.BookingDetail>
+@{
+    ViewBag.Title = "Detail Report";
+}
+
+<section class="jumbotron col-xs-12 py-3 px-0">
+    <div class="mx-0">
+        <h1 class="jumbotron-heading text-center display-2">@ViewBag.Title</h1><br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Emp_Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.dateTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhotoType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhotoDetail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NumPeople)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Medium)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Emp_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.dateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhotoType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhotoDetail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumPeople)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Medium)
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </table>
+        </div><br />
+        <div class="p-2">
+            @Html.ActionLink("Back to List", "Index", "BookingDetail")
+        </div>
+    </div>
+</section>

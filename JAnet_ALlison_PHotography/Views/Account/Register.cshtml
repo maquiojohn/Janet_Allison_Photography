@@ -1,0 +1,101 @@
+﻿@model JAnet_ALlison_PHotography.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center">Register for Janet Allison Photography</h1><br>
+        <p class="lead text-center">Where we offer pictures that will bring cherished memories forever.</p><br>
+
+
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "col-md-8 col-xs-12 mx-auto", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>Create a new account.</h4>
+            <hr />
+            if (User.IsInRole("Admin"))
+            {
+                <div class="">
+                    @Html.LabelFor(m => m.RoleName, new { @class = "col-form-label" })
+                    @Html.DropDownListFor(m => m.RoleName, new SelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.RoleName, "", new { @class = "text-danger" })<br />
+                </div>
+            }
+            else
+            { <div style="display: none;">
+                    @Html.DropDownListFor(m => m.RoleName, new SelectList(ViewBag.Cust, "Value", "Text"), new { @class = "form-control" })
+                </div>
+            }
+
+            <div class="">
+                @Html.LabelFor(m => m.FirstName, new { @class = "col-form-label" })
+                <div class="">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })<br />
+                </div>
+            </div>
+            <div class="">
+                @Html.LabelFor(m => m.LastName, new { @class = "col-form-label" })
+                <div class="">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })<br />
+                </div>
+            </div>
+            <div class="">
+                @Html.LabelFor(m => m.Address, new { @class = "col-form-label" })
+                <div class="">
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })<br />
+                </div>
+            </div>
+            <div class="">
+                @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-form-label" })
+                <div class="">
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })<br />
+                </div>
+            </div>
+            <div class="">
+                @Html.LabelFor(m => m.Email, new { @class = "col-form-label" })
+                <div class="">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })<br />
+                </div>
+            </div>
+            <div class="">
+                @Html.LabelFor(m => m.Password, new { @class = "col-form-label" })
+                <div class="">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })<br />
+                </div>
+            </div>
+            <div class="">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-form-label" })
+                <div class="">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })<br />
+                </div>
+            </div>
+            <br />
+            <div class="text-center">
+                @*recaptcha*@
+                <div class="g-recaptcha" data-sitekey="6Lc7wo0UAAAAAPBdM7bIxVmRVX4-erK4OuyaA4VQ"></div>
+            </div>
+            
+            <div class="text-center">
+                @if (!string.IsNullOrEmpty(ViewBag.Message))
+                {
+                <p class="text-danger">@ViewBag.Message</p>
+                }
+                <input type="submit" class="btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12" value="Register" />
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src='https://www.google.com/recaptcha/api.js'></script>

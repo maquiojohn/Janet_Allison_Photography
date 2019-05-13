@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Success";
+}
+
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-4">@ViewBag.Title</h1><br>
+        <h3 class="text-center lead">Successfully submitted booking request, you will be contacted shortly.</h3>
+        <div class="text-center">
+            @Html.ActionLink("Homepage", "Index", "Home", null, new { @class = "btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12", @style = "margin-left: 0!important;" })
+        </div>
+    </div>
+</section>

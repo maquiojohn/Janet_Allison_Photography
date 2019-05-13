@@ -1,0 +1,82 @@
+﻿@model JAnet_ALlison_PHotography.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "ManageUserRoles";
+}
+
+<h1 class="text-center">Manage User Roles</h1>
+
+<hr />
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-4">Add Role To User</h1><br>
+
+        @using (Html.BeginForm("RoleAddToUser", "Role", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <p>
+                Email : @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })<br />
+                Role Name: @Html.DropDownListFor(m => m.RoleName, new SelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control" })
+            </p>
+            <div class="text-center">
+                <input type="submit" value="Save" class="btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12" style="margin: 0!important;" />
+            </div>
+        }
+
+        @ViewBag.User
+        @ViewBag.RoleName 
+    </div>
+</section>
+
+<div class="p-1"></div>
+
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-4">See Users Roles</h1><br>
+        @using (Html.BeginForm("GetRoles", "Role", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <p>
+                Email : @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </p>
+            <div class="text-center">
+                <input type="submit" value="Get Roles for this User" class="btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12" style="margin: 0!important;" />
+            </div>
+        }
+        @if (ViewBag.RolesForThisUser != null)
+        {
+            <div style="background-color:yellow;">
+                <h3>Roles for this user </h3>
+                <ol>
+                    @foreach (string s in ViewBag.RolesForThisUser)
+                    {
+                        <li>@s</li>
+                    }
+                </ol>
+            </div>
+        }
+    </div>
+</section>
+
+<div class="p-1"></div>
+
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-4">Delete A Users Role</h1><br>
+        @using (Html.BeginForm("DeleteRoleForUser", "Role", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <p>
+                Email : @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })<br />
+                Role Name: @Html.DropDownListFor(m => m.RoleName, new SelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control" })
+            </p>
+            <div class="text-center">
+                <input type="submit" value="Delete this user from Role" class="btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12" style="margin: 0!important;" />
+            </div>
+        }
+    </div>
+</section>

@@ -1,0 +1,194 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Janet Allison Photography</title>
+
+    @Scripts.Render("~/Scripts/jquery-3.3.1.js")
+    @Scripts.Render("~/Scripts/bootstrap.bundle.js")
+    @Scripts.Render("~/Scripts/bootstrap.bundle.js.map")
+    @Scripts.Render("~/Scripts/bootstrap.bundle.min.js")
+    @Scripts.Render("~/Scripts/bootstrap.bundle.min.js.map")
+    @Scripts.Render("~/Scripts/bootstrap.js")
+    @Scripts.Render("~/Scripts/bootstrap.js.map")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    @Scripts.Render("~/Scripts/bootstrap.min.js.map")
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+    @Styles.Render("~/Content/bootstrap-grid.css")
+    @Styles.Render("~/Content/bootstrap-grid.css.map")
+    @Styles.Render("~/Content/bootstrap-grid.min.css")
+    @Styles.Render("~/Content/bootstrap-grid.min.css.map")
+    @Styles.Render("~/Content/bootstrap-reboot.css")
+    @Styles.Render("~/Content/bootstrap-reboot.css.map")
+    @Styles.Render("~/Content/bootstrap-reboot.min.css")
+    @Styles.Render("~/Content/bootstrap-reboot.min.css.map")
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/bootstrap.css.map")
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("~/Content/bootstrap.min.css.map")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @RenderSection("css", false)
+    @RenderSection("cssBooking", false)
+    @RenderSection("cssShop", false)
+    @RenderSection("js", false)
+    @RenderSection("Scripts", required: false)
+    <style>
+        body {
+            background-color: #FFFDF9;
+        }
+
+        .jumbotron {
+            background: #F5F5F5;
+            border-radius: 10px;
+            border: 1px solid #D2D2D2;
+            -webkit-background-clip: padding-box; /* for Safari */
+            background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+        }
+
+        .bg-nav {
+            background-color: #00ace6;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: white !important;
+        }
+
+        .navbar-light .navbar-brand {
+            color: white!important;
+        }
+
+        .grey {
+            color: #212529;
+        }
+
+        .btn-primary {
+            background-color: #73D2F2;
+            color: #272626;
+            border-color: #2D9AF5;
+        }
+
+            .btn-primary:hover {
+                background-color: #11C3FE;
+            }
+
+        .g-recaptcha {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-nav">
+        <a class="navbar-brand px-3" href="#">
+            <img src="~/Pics/Logo.png" alt="Sample Photo" height="35" width="70"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Gallery", "Gallery", "Home", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
+                </li>
+                @if (!User.IsInRole("Admin"))
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Book An Appointment", "Create", "Booking", null, new { @class = "nav-link" })
+                    </li>
+                }
+                <li class="nav-item">
+                    @Html.ActionLink("Store", "Index", "StoreDetail", null, new { @class = "nav-link" })
+                </li>
+                @if (User.IsInRole("Admin") || User.IsInRole("Employee") || User.IsInRole("Customer"))
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Cart", "Index", "ShoppingCart", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("View Your Photos", "Index", "CustomerPhoto", null, new { @class = "nav-link" })
+                    </li>
+                }
+                @if (User.IsInRole("Customer"))
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("View Your Purchase History", "Index", "Receipts", null, new { @class = "nav-link" })
+                    </li>
+                }
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Administrative Tools
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            @Html.ActionLink("Manage Users", "Index", "UserViewModel", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Manage Roles", "Index", "Role", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Manage Bookings", "Index", "BookingDetail", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Manage Store Items", "Index", "StoreDetail", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Upload Client Photos", "Create", "PurchasedPhoto", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Upload Client Zips", "Create", "ZipFiles", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Upload Store Items", "Create", "ProductPicture", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("View All Receipts", "Index", "Receipts", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Register a New Account", "Register", "Account", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                }
+                @if (User.IsInRole("Employee"))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Administrative Tools
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            @Html.ActionLink("Manage Bookings", "Index", "BookingDetail", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Manage Store Items", "Index", "StoreDetail", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Upload Client Photos", "Create", "PurchasedPhoto", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Upload Client Zips", "Create", "ZipFiles", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Upload Store Items", "Create", "ProductPicture", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                }
+            </ul>
+            @Html.Partial("_LoginPartial")
+            <ul class="navbar-nav flex-row float-right">
+                <li class="nav-item">&nbsp;&nbsp;</li>
+                <li class="nav-item"><a class="nav-link px-2" href="https://www.facebook.com/Janet-Allison-Photography-2267098996685924/"><span class="fa fa-facebook"></span></a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="https://twitter.com/JanetAl39775263"><span class="fa fa-twitter"></span></a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="https://www.youtube.com/channel/UCNbX9ym0JilVVwZX_FPbJlw"><span class="fa fa-youtube"></span></a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="https://www.instagram.com/janetallisonphotography/?hl=en"><span class="fa fa-instagram"></span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="p-1"></div>
+    <div>
+        @RenderBody()
+        <hr />
+        <footer class="text-center">
+            <div class="py-1">
+                &copy; 2017-@DateTime.Now.Year Janet Allison Photography<br />
+                <span class="flex-row">
+                    <a class="px-2" href="https://www.facebook.com/Janet-Allison-Photography-2267098996685924/"><span class="fa fa-facebook grey"></span></a>
+                    <a class="px-2" href="https://twitter.com/JanetAl39775263"><span class="fa fa-twitter grey"></span></a>
+                    <a class="px-2" href="https://www.youtube.com/channel/UCNbX9ym0JilVVwZX_FPbJlw"><span class="fa fa-youtube grey"></span></a>
+                    <a class="px-2" href="https://www.instagram.com/janetallisonphotography/?hl=en"><span class="fa fa-instagram grey"></span></a>
+                </span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

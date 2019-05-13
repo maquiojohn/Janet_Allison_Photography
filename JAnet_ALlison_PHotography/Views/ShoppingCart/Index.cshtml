@@ -1,0 +1,76 @@
+﻿@using JAnet_ALlison_PHotography.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row justify-content-center">
+    <section class="jumbotron col-md-10 col-sm-12 mx-auto py-3">
+        <div class="container">
+            <h1 class="jumbotron-heading text-center display-1">Cart</h1><br>
+
+            @{if (Session["Cart"] != null)
+                {<div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Preview</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Sub-Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var cart in (List<ShoppingCart>)Session["Cart"])
+                                {
+                                    <tr>
+                                        <td>@cart.Picture.Title</td>
+                                        <td>
+                                            @{var base64 = Convert.ToBase64String(cart.Picture.Picture);
+                                                var imgsrc = string.Format("data:productPicture/gif;base64,{0}", base64);}
+
+                                            <img src="@imgsrc" style="max-width:100px; max-height:100px" />
+                                        </td>
+                                        <td>@cart.Picture.Price</td>
+                                        <td>@cart.Picture.Description</td>
+                                        <td>@cart.Quantity</td>
+                                        <td>$@(String.Format("{0:N0}", cart.Picture.Price * cart.Quantity))</td>
+                                        <td>
+                                            @Html.ActionLink("Delete", "Delete", "ShoppingCart", new { id = cart.Picture.Picture_Id },
+                        new { onclick = "return confirm ('Are you sure you want to delete this?');" })
+                                        </td>
+
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="5">Total: </td>
+                                    <td>
+                                        @{
+                                            List<ShoppingCart> temp = (List<ShoppingCart>)Session["Cart"];
+                                            var total = String.Format("{0:N0}", temp.Sum(x => x.Quantity * x.Picture.Price));
+                                        }
+
+                                        $@total  CAD
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <h4 class="text-center">There are no items in your cart.</h4>
+                    <br />
+                }
+            }
+            <div class="text-center">
+                @Html.ActionLink("Continue Shopping", "Index", "StoreDetail", null, new { @class = "btn btn-primary m-2 col-md-3 col-sm-12", @style = "margin-left: 0!important;" })
+                @Html.ActionLink("Check Out", "CheckOut", "ShoppingCart", null, new { @class = "btn btn-primary m-2 col-md-3 col-sm-12", @style = "margin-left: 0!important;" })
+            </div>
+
+        </div>
+    </section>
+</div>

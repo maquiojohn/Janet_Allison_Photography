@@ -1,0 +1,73 @@
+﻿@model IEnumerable<JAnet_ALlison_PHotography.ViewModel.BookingDetail>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Emp_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhotoType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhotoDetail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumPeople)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Medium)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Emp_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhotoType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhotoDetail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumPeople)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Medium)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Booking", new { id = item.booking_Id }, null)<br />
+                        @Html.ActionLink("Details", "Details", "Booking", new { id = item.booking_Id }, null)<br />
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Delete", "Delete", "Booking", new { id = item.booking_Id }, null)
+                        }
+                        </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

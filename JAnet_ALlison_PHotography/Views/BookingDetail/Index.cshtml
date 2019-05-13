@@ -1,0 +1,22 @@
+﻿@model IEnumerable<JAnet_ALlison_PHotography.ViewModel.BookingDetail>
+
+@{
+    ViewBag.Title = "Bookings";
+}
+
+<section class="jumbotron col-xs-12 py-3 px-0">
+    <div class="mx-0">
+        <h1 class="jumbotron-heading text-center display-2">@ViewBag.Title</h1><br>
+
+        @Html.Partial("_BookingView")
+        <br />
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="p-2 text-center">
+                @Html.ActionLink("Summary Report", "SummaryReport", "BookingDetail", null, new { @class = "btn btn-primary m-2 col-xl-3 col-md-12 col-sm-12", @style = "margin-left: 0!important;" })<br />
+                @Html.ActionLink("Exception Report", "ExceptionReport", "BookingDetail", null, new { @class = "btn btn-primary m-2 col-xl-3 col-md-12 col-sm-12", @style = "margin-left: 0!important;" })<br />
+                @Html.ActionLink("Detail Report", "DetailedReport", "BookingDetail", null, new { @class = "btn btn-primary m-2 col-xl-3 col-md-12 col-sm-12", @style = "margin-left: 0!important;" })
+            </div>
+        }
+        </div>
+</section>

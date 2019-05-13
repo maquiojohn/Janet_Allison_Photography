@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<section class="jumbotron col-md-10 col-sm-12 mx-auto py-3">
+    <div class="container" style="padding-left: 0!important;">
+        <h1 class="jumbotron-heading text-center display-1" >Contact</h1><br>
+        <div class="row">
+            <h3 class="col-lg-6 col-sm-12"><br /><br /><br /><br />
+                <b>Name:</b> Janet Allison<br />
+                <b>Phone Number:</b> 518-645-6858<br />
+                <b>Email:</b> <a href="mailto:janet.l.a.w@outlook.com">Janet.l.a.w@outlook.com</a>
+            </h3>
+            <div id="carouselExampleCaptions" class="carousel slide col-lg-6 col-sm-12 centerHeight" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="~/Pics/JanetAllison BW HK 6F0A2405.jpg" alt="Sample Photo" class="img-fluid" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/Pics/1x8x10e.jpg" alt="Sample Photo" class="img-fluid" />
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/Pics/generations.jpg" alt="Sample Photo" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="text-center mx-auto">
+            @Html.ActionLink("Book An Appointment", "Create", "Booking", null, new { @class = "btn btn-primary m-2 col-md-3 col-sm-12" })
+            @Html.ActionLink("View Some Of Our Products", "Index", "StoreDetail", null, new { @class = "btn btn-primary m-2 col-md-3 col-sm-12" })
+        </div>
+    </div>
+</section>

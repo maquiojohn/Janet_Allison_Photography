@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Email Confirmed!";
+}
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center">@ViewBag.Title</h1><br>
+        <div class="text-center">
+            <p>
+                Thank you for confirming your email. Please @Html.ActionLink("click here to log in.", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+            </p>
+        </div>
+    </div>
+</section>

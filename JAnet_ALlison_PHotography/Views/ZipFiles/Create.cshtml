@@ -1,0 +1,63 @@
+﻿@model JAnet_ALlison_PHotography.Models.ZipFile
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-1">@ViewBag.Title</h1>
+        <h3 class="lead text-center">Upload a customers Zip File.</h3>
+        @using (Html.BeginForm("Create", "ZipFiles", FormMethod.Post, new { enctype = "multipart/form-data", @class = "col-md-8 col-xs-12 mx-auto", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="">
+                
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="">
+                    @Html.LabelFor(model => model.Customer_Id, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="">
+                        @Html.DropDownListFor(m => m.Customer_Id, new SelectList(ViewBag.Customer, "Value", "Text"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Customer_Id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="">
+                    @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="">
+                        <input type="file" name="ImageFile" id="ImageFile" required>
+                    </div>
+                </div>
+
+                <div class="">
+                    @Html.LabelFor(model => model.DateTaken, htmlAttributes: new { @class = "col-form-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.DateTaken, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DateTaken, "", new { @class = "text-danger" })<br />
+                        <div class="text-danger">@ViewBag.ErrorMessage</div><br />
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="text-center">
+                        <input type="submit" value="Create" class="btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index", "CustomerZipFile")
+        </div>
+    </div>
+</section>

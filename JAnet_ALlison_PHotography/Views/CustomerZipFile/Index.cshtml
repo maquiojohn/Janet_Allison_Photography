@@ -1,0 +1,42 @@
+﻿@model IEnumerable<JAnet_ALlison_PHotography.ViewModel.CustomerZipFile>
+@{
+    ViewBag.Title = "Zip File Upload";
+}
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-1">@ViewBag.Title</h1><br>
+        <p>
+            @Html.ActionLink("Upload Zip File", "Create", "ZipFiles")
+        </p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Customer_Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer_Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "ZipFiles", new { id = item.Picture_Id }, null)<br />
+                            @Html.ActionLink("Delete", "Delete", "ZipFiles", new { id = item.Picture_Id }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<JAnet_ALlison_PHotography.Models.RoleViewModel>
+
+@{
+    ViewBag.Title = "Roles";
+}
+
+<section class="jumbotron col-lg-11 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-1">@ViewBag.Title</h1><br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            Actions:
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })<br />
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            @Html.ActionLink("Create New Role", "Create", "Role", null, new { @class = "btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12", @style = "margin-left: 0!important;" })
+            @Html.ActionLink("Manage User Roles", "ManageUserRoles", "Role", null, new { @class = "btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12", @style = "margin-left: 0!important;" })
+        </div>
+    </div>
+</section>

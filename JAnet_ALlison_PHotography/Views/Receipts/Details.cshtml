@@ -1,0 +1,163 @@
+﻿@model JAnet_ALlison_PHotography.Models.Receipt
+
+@{
+    ViewBag.Title = "Receipt Details";
+}
+
+<section class="jumbotron col-lg-6 col-xs-12 py-3 mx-auto" style="padding: 0!important;">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-1">@ViewBag.Title</h1><br>
+        <div>
+            <h4 class="text-center">Number of Items Ordered: @Html.DisplayFor(mode => mode.Receipt_Id)</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.FirstName):
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.LastName):
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Address):
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PhoneNumber):
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Email):
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Receipt_Date):
+                </dt>
+
+                <dd class="col-sm-9">
+                    @String.Format("{0:MMM/dd//yy}", Model.Receipt_Date)
+                </dd>
+
+            </dl>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Picture
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Action:
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.OrderDetails)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @{var base64 = Convert.ToBase64String(item.Picture);
+                                    var imgsrc = string.Format("data:productPicture/gif;base64,{0}", base64);}
+
+                                <img src="@imgsrc" style="max-width:100px; max-height:100px" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Download", "DownloadFile", new { id = item.Picture_Id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @{
+                var price = 0.00;
+                var subtotal = 0.00;
+                var tax = 0.15;
+                var total = 0.00;
+
+                foreach (var item in Model.OrderDetails)
+                {
+                    price += (double)item.Price;
+                }
+                subtotal = (double)price * tax;
+                total = (double)price + subtotal;
+
+                ViewBag.Price = price;
+                ViewBag.Subtotal = subtotal;
+                ViewBag.Total = total;
+            }
+            <dl class="row">
+                <dt class="col-sm-3">
+                    Price:
+                </dt>
+
+                <dd class="col-sm-9">
+                    $@ViewBag.Price CAD
+                </dd>
+
+                <dt class="col-sm-3">
+                    Tax:
+                </dt>
+
+                <dd class="col-sm-9">
+                    $@ViewBag.Subtotal CAD
+                </dd>
+
+                <dt class="col-sm-3">
+                    Total:
+                </dt>
+
+                <dd class="col-sm-9">
+                    $@ViewBag.Total CAD
+                </dd>
+            </dl>
+
+            <p>
+
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+    </div>
+</section>

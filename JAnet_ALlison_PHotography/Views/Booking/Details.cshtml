@@ -1,0 +1,70 @@
+﻿@model JAnet_ALlison_PHotography.Models.Booking
+
+@{
+    ViewBag.Title = "Details";
+}
+<section class="jumbotron col-lg-5 col-xs-12 py-3 mx-auto">
+    <div class="container">
+        <h1 class="jumbotron-heading text-center display-1">@ViewBag.Title</h1><br>
+            <hr />
+            <dl class="row">
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.dateTime)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.dateTime)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PhotoType)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.PhotoType)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PhotoDetail)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.PhotoDetail)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.NumPeople)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.NumPeople)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Medium)
+                </dt>
+
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Medium)
+                </dd>
+            </dl>
+        <div class="text-center">
+            @Html.ActionLink("Edit", "Edit", "Booking", new { id = Model.booking_Id }, new { @class = "btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12", @style = "margin-left: 0!important;" }) 
+            @Html.ActionLink("Back to List", "Index", "BookingDetail", null, new { @class = "btn btn-primary m-2 col-xl-5 col-md-12 col-sm-12", @style = "margin-left: 0!important;" })
+        </div>
+    </div>
+</section>

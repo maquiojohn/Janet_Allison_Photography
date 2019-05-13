@@ -1,0 +1,188 @@
+﻿@model IEnumerable<JAnet_ALlison_PHotography.ViewModel.CustomerPhoto>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Index CustomerPhoto";
+}
+
+<div class="row justify-content-center">
+    <section class="jumbotron col-md-10 col-sm-12 mx-auto py-3">
+        <div class="container">
+
+            <h1 class="jumbotron-heading text-center display-1">View Your Photos</h1><br>
+
+            @if (User.IsInRole("Admin"))
+            {
+                var temp = ViewBag.ListPhoto.Count;
+                <p>
+                    @Html.ActionLink("Upload New Photo", "Create", "PurchasedPhoto")
+                </p>
+                if (temp != 0)
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Customer_Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Title)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Picture)
+                                </th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Customer_Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td>
+                                        @{var base64 = Convert.ToBase64String(item.Picture);
+                                            var imgsrc = string.Format("data:productPicture/gif;base64,{0}", base64);}
+
+                                        <img src="@imgsrc" style="max-width:100px; max-height:100px" />
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", "PurchasedPhoto", new { id = item.Picture_Id }, null)<br /><br />
+                                        @Html.ActionLink("Delete", "Delete", "PurchasedPhoto", new { id = item.Picture_Id }, null)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-center">No Photos Uploaded</p>
+                }
+            }
+            else
+            {
+                var temp = ViewBag.ZipFilesListUser.Count;
+                if (temp != 0)
+                {
+
+                    using (Html.BeginForm("DownloadFile", "CustomerPhoto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <p>Download all Pictures in a Zip File</p>
+                            <div class="col-md-10">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    @Html.DropDownList("ZipFile", (IEnumerable<SelectListItem>)ViewBag.ZipFilesList)
+                                }
+                                else
+                                {
+                                    @Html.DropDownList("ZipFile", (IEnumerable<SelectListItem>)ViewBag.ZipFilesListUser)
+                                }
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Download" class="btn btn-default" />
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                        <p class="text-center">No Zip files available, @Html.ActionLink("book an appointment now", "Create", "Booking") and select the digital package to get some great pictures!</p>
+                }
+                var tempPhoto = ViewBag.ListPhoto.Count;
+
+                if (tempPhoto != 0)
+                {
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Customer_Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Title)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Picture)
+                            </th>
+
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Customer_Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @{var base64 = Convert.ToBase64String(item.Picture);
+                                        var imgsrc = string.Format("data:productPicture/gif;base64,{0}", base64);}
+
+                                    <img src="@imgsrc" style="max-width:100px; max-height:100px" />
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Download", "DownloadPhoto", new { id = item.Picture_Id })
+                                </td>
+                            </tr>
+                        }
+
+
+
+                    </table>
+                }
+                else
+                {
+                    <p class="text-center">No photos available, @Html.ActionLink("book an appointment now", "Create", "Booking") and select the digital package to get some great pictures!</p>
+                }
+
+
+                var counter = 0;
+                foreach (var item in Model)
+                {
+                    if (item.Customer_Email.Equals(User.Identity.GetUserName()))
+                    {
+                        <div class="card" style="width: 18rem;">
+
+                            @{var base64 = Convert.ToBase64String(item.Picture);
+                                var imgsrc = string.Format("data:productPicture/gif;base64,{0}", base64);}
+
+                            <img src="@imgsrc" class="card-img-top" />
+                            <div class="card-body">
+                                @Html.ActionLink("Download", "DownloadPhoto", new { id = item.Picture_Id })
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+                        counter = 1;
+
+                    }
+                }
+                if (counter == 1)
+                {
+                    <p id="one" class="text-center">No Photos Available</p>
+
+                }
+
+
+            }
+
+
+
+        </div>
+    </section>
+</div>
